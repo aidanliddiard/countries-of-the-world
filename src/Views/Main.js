@@ -15,7 +15,8 @@ export default function Main() {
 
   return (
     <div>
-      <CountryCard />
+      {/* <CountryCard /> */}
+      <CountryCard name="Scotland" continent="Europe" iso2="BE" />
     </div>
   );
 }
