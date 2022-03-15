@@ -1,22 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import CountryCard from '../Components/CountryCard';
 import { fetchCountry } from '../services/country';
 
 export default function Main() {
-  //const [country, getCountry] = useState([]);
+  const [countries, setCountries] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const resp = await fetchCountry();
-      console.log(resp);
+      setCountries(resp);
     };
     fetchData();
   }, []);
 
   return (
     <div>
-      {/* <CountryCard /> */}
-      <CountryCard name="Scotland" continent="Europe" iso2="BE" />
+      {countries.map((country) => (
+        <CountryCard key={country.id} {...country} />
+      ))}
     </div>
   );
 }
