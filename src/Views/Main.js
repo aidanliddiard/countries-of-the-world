@@ -7,11 +7,16 @@ import './Main.css';
 export default function Main() {
   const [countries, setCountries] = useState([]);
   const [continent, setContinent] = useState('All');
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
-      const resp = await fetchCountry();
-      setCountries(resp);
+      try {
+        const resp = await fetchCountry();
+        setCountries(resp);
+      } catch (e) {
+        setErrorMessage('Ooops... our bad. Please reload the page.');
+      }
     };
     fetchData();
   }, []);
@@ -24,6 +29,7 @@ export default function Main() {
 
   return (
     <main>
+      <p>{errorMessage}</p>
       <div className="dropdown">
         <ContinentDropdown options={options} setContinent={setContinent} />
       </div>
